@@ -1,0 +1,86 @@
+﻿<Window x:Class="PROGRES.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PROGRES"
+        mc:Ignorable="d"
+        Title="PROGRES" Height="580" Width="1050"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        
+        >
+
+    <Border Background="#1F2045" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Background="#FFB600">
+                <Image  x:Name="ProgresImg" Height="90" Width="162" Source="Images/output-onlinepngtools.png"  />
+            </StackPanel>
+
+            <Border  Grid.Row="1">
+                <StackPanel DockPanel.Dock ="Top">
+                    <!--  <Button Foreground="White" Content="Довідник продукції" Name="Btn_Catalogue_Prod" FontSize="15" Width="200" Height="50"  Click="Btn_Catalogue_Prod_Click" >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFB600"/>
+                                </Trigger>
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="50"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>-->
+
+
+                    <RadioButton x:Name="RBtnCatalogue" Click="RBtnCatalogue_Click" Content="Довідник продукції" Foreground="White" Height="50" FontSize="15" Style="{StaticResource MenuButtonTheme}" Cursor="Hand" >
+                    </RadioButton>
+
+                    <RadioButton Name="RBtnOrder" Click="RBtnOrder_Click" Content="Оформити замовлення" Foreground="White" Height="50" FontSize="15" Style="{StaticResource MenuButtonTheme}" Cursor="Hand"/>
+                    <RadioButton Name="RBtnHistory" Click="RBtnHistory_Click" Content="Історія замовлень" Foreground="White" Height="50" FontSize="15" Style="{StaticResource MenuButtonTheme}" Cursor="Hand"/>
+
+                    <!-- <Button BorderThickness="0" Content="Оформлення замовлення" Name="Btn_Order" FontSize="15" Width="180" Height="30" HorizontalAlignment="Center"  Click="Btn_Order_Click" Background="#FE6584" Foreground="White"/>
+                <Button BorderThickness="0" Content="Історія замовлень" Name="Btn_Order_History"  FontSize="15" Width="180" Height="30" HorizontalAlignment="Center"  Click="Btn_Order_History_Click" Background="#FE6584" Foreground="White"/>-->
+                </StackPanel>
+
+            </Border>
+            <RadioButton Grid.Row="1" VerticalAlignment="Bottom" Name="RBtnExit" Click="RBtnExit_Click" Content="Вихід з програми" Background="#FFB600" Foreground="White" Height="50" FontSize="15" Style="{StaticResource MenuButtonTheme}" Cursor="Hand"/>
+            <Frame Background="#22224B" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered" Grid.Column="1" Grid.Row="1" Name="MainFrame">
+            </Frame>
+
+            <TextBlock Foreground="#FFB600" x:Name="txtTime" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36"  Margin="0,0,0,55"  />
+            <TextBlock x:Name="txtDate" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" Foreground="#FFB600"  />
+            <StackPanel Grid.Column="1" Background="#1A1B3D" Orientation="Horizontal"  Width="850" Height="75" >
+                <Image x:Name="mainImage" Height="50" Width="50" Source="Images/MainPage.png" Margin="25,0,0,1"/>
+                <TextBlock x:Name="txtTitle" Text="Головна сторінка" FontSize="36" Foreground="White"  Margin="200,8,0,0" ></TextBlock>
+            </StackPanel>
+            <RadioButton Style="{StaticResource MenuButtonTheme}" Background="#FFB600" Foreground="White" Cursor="Hand" Content="До головного меню" Name="BtnBack" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnBack_Click" Grid.Column="1" FontSize="15" Width="180" Height="30" Margin="0,0,25,0">
+            </RadioButton>
+
+        </Grid>
+
+    </Border>
+</Window>

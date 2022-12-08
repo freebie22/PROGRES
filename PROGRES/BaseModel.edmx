@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProgresDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OutfitID" Type="int" />
+          <Property Name="Outfit_Count" Type="int" Nullable="false" />
+          <Property Name="Customer_Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Midname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pay_Option" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TotalSum" Type="money" Nullable="false" />
+          <Property Name="IsDone" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="Identificator" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress_Info" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Shopping_Info" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Identifikator" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShoppingList" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TotalSum" Type="money" Nullable="false" />
+          <Property Name="AdressList" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="CustomerList" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Outfit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountAvailiable" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ImagePreview" Type="varbinary(max)" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="OutfitID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="OutfitID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfOrderList">
+          <Key>
+            <PropertyRef Name="OrderListID" />
+            <PropertyRef Name="OutfitID" />
+          </Key>
+          <Property Name="OrderListID" Type="int" Nullable="false" />
+          <Property Name="OutfitID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfUnit">
+          <Key>
+            <PropertyRef Name="OutfitID" />
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="OutfitID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TypeOfOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="TypeOfOrder" Type="Self.TypeOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfOrder">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfOrder_Outfit">
+          <End Role="Outfit" Type="Self.Outfit" Multiplicity="1" />
+          <End Role="TypeOfOrder" Type="Self.TypeOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outfit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfOrder">
+              <PropertyRef Name="OutfitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfOrderList_OrderList">
+          <End Role="OrderList" Type="Self.OrderList" Multiplicity="1" />
+          <End Role="TypeOfOrderList" Type="Self.TypeOfOrderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfOrderList">
+              <PropertyRef Name="OrderListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfOrderList_Outfit">
+          <End Role="Outfit" Type="Self.Outfit" Multiplicity="1" />
+          <End Role="TypeOfOrderList" Type="Self.TypeOfOrderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outfit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfOrderList">
+              <PropertyRef Name="OutfitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfUnit_Outfit">
+          <End Role="Outfit" Type="Self.Outfit" Multiplicity="1" />
+          <End Role="TypeOfUnit" Type="Self.TypeOfUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outfit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfUnit">
+              <PropertyRef Name="OutfitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfUnit_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="TypeOfUnit" Type="Self.TypeOfUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TypeOfUnit">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProgresDataBaseModelStoreContainer">
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderList" EntityType="Self.OrderList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outfit" EntityType="Self.Outfit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfOrder" EntityType="Self.TypeOfOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfOrderList" EntityType="Self.TypeOfOrderList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfUnit" EntityType="Self.TypeOfUnit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TypeOfOrder_Order" Association="Self.FK_TypeOfOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="TypeOfOrder" EntitySet="TypeOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfOrder_Outfit" Association="Self.FK_TypeOfOrder_Outfit">
+            <End Role="Outfit" EntitySet="Outfit" />
+            <End Role="TypeOfOrder" EntitySet="TypeOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfOrderList_OrderList" Association="Self.FK_TypeOfOrderList_OrderList">
+            <End Role="OrderList" EntitySet="OrderList" />
+            <End Role="TypeOfOrderList" EntitySet="TypeOfOrderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfOrderList_Outfit" Association="Self.FK_TypeOfOrderList_Outfit">
+            <End Role="Outfit" EntitySet="Outfit" />
+            <End Role="TypeOfOrderList" EntitySet="TypeOfOrderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfUnit_Outfit" Association="Self.FK_TypeOfUnit_Outfit">
+            <End Role="Outfit" EntitySet="Outfit" />
+            <End Role="TypeOfUnit" EntitySet="TypeOfUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfUnit_Type" Association="Self.FK_TypeOfUnit_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="TypeOfUnit" EntitySet="TypeOfUnit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProgresDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OutfitID" Type="Int32" />
+          <Property Name="Outfit_Count" Type="Int32" Nullable="false" />
+          <Property Name="Customer_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customer_Midname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customer_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customer_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pay_Option" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalSum" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Identificator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Outfit" Relationship="ProgresDataBaseModel.TypeOfOrder" FromRole="Order" ToRole="Outfit" />
+          <Property Name="Adress_Info" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Shopping_Info" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Outfit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountAvailiable" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePreview" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsActual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.TypeOfUnit" FromRole="Outfit" ToRole="Type" />
+          <NavigationProperty Name="Order" Relationship="ProgresDataBaseModel.TypeOfOrder" FromRole="Outfit" ToRole="Order" />
+          <NavigationProperty Name="OrderList" Relationship="ProgresDataBaseModel.TypeOfOrderList" FromRole="Outfit" ToRole="OrderList" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Outfit" Relationship="Self.TypeOfUnit" FromRole="Type" ToRole="Outfit" />
+        </EntityType>
+        <Association Name="TypeOfUnit">
+          <End Role="Outfit" Type="Self.Outfit" Multiplicity="*" />
+          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProgresDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Outfit" EntityType="Self.Outfit" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <AssociationSet Name="TypeOfUnit" Association="Self.TypeOfUnit">
+            <End Role="Outfit" EntitySet="Outfit" />
+            <End Role="Type" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="TypeOfOrder" Association="ProgresDataBaseModel.TypeOfOrder">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Outfit" EntitySet="Outfit" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ProgresDataBaseModel.sysdiagrams" />
+          <EntitySet Name="OrderList" EntityType="ProgresDataBaseModel.OrderList" />
+          <AssociationSet Name="TypeOfOrderList" Association="ProgresDataBaseModel.TypeOfOrderList">
+            <End Role="OrderList" EntitySet="OrderList" />
+            <End Role="Outfit" EntitySet="Outfit" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="TypeOfOrder">
+          <End Type="ProgresDataBaseModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="ProgresDataBaseModel.Outfit" Role="Outfit" Multiplicity="*" />
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="OrderList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Identifikator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShoppingList" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSum" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AdressList" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Outfit" Relationship="ProgresDataBaseModel.TypeOfOrderList" FromRole="OrderList" ToRole="Outfit" />
+          <Property Name="CustomerList" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="TypeOfOrderList">
+          <End Type="ProgresDataBaseModel.OrderList" Role="OrderList" Multiplicity="*" />
+          <End Type="ProgresDataBaseModel.Outfit" Role="Outfit" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProgresDataBaseModelStoreContainer" CdmEntityContainer="ProgresDataBaseEntities">
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="ProgresDataBaseModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Shopping_Info" ColumnName="Shopping_Info" />
+                <ScalarProperty Name="Adress_Info" ColumnName="Adress_Info" />
+                <ScalarProperty Name="Identificator" ColumnName="Identificator" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OutfitID" ColumnName="OutfitID" />
+                <ScalarProperty Name="Outfit_Count" ColumnName="Outfit_Count" />
+                <ScalarProperty Name="Customer_Surname" ColumnName="Customer_Surname" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_Midname" ColumnName="Customer_Midname" />
+                <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+                <ScalarProperty Name="Customer_Email" ColumnName="Customer_Email" />
+                <ScalarProperty Name="Pay_Option" ColumnName="Pay_Option" />
+                <ScalarProperty Name="TotalSum" ColumnName="TotalSum" />
+                <ScalarProperty Name="IsDone" ColumnName="IsDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outfit">
+            <EntityTypeMapping TypeName="ProgresDataBaseModel.Outfit">
+              <MappingFragment StoreEntitySet="Outfit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CountAvailiable" ColumnName="CountAvailiable" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="ProgresDataBaseModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TypeOfUnit" TypeName="ProgresDataBaseModel.TypeOfUnit" StoreEntitySet="TypeOfUnit">
+            <EndProperty Name="Outfit">
+              <ScalarProperty Name="ID" ColumnName="OutfitID" />
+            </EndProperty>
+            <EndProperty Name="Type">
+              <ScalarProperty Name="ID" ColumnName="TypeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TypeOfOrder" TypeName="ProgresDataBaseModel.TypeOfOrder" StoreEntitySet="TypeOfOrder">
+            <EndProperty Name="Outfit">
+              <ScalarProperty Name="ID" ColumnName="OutfitID" />
+            </EndProperty>
+            <EndProperty Name="Order">
+              <ScalarProperty Name="ID" ColumnName="OrderID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProgresDataBaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderList">
+            <EntityTypeMapping TypeName="ProgresDataBaseModel.OrderList">
+              <MappingFragment StoreEntitySet="OrderList">
+                <ScalarProperty Name="CustomerList" ColumnName="CustomerList" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="AdressList" ColumnName="AdressList" />
+                <ScalarProperty Name="TotalSum" ColumnName="TotalSum" />
+                <ScalarProperty Name="ShoppingList" ColumnName="ShoppingList" />
+                <ScalarProperty Name="Identifikator" ColumnName="Identifikator" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TypeOfOrderList" TypeName="ProgresDataBaseModel.TypeOfOrderList" StoreEntitySet="TypeOfOrderList">
+            <EndProperty Name="Outfit">
+              <ScalarProperty Name="ID" ColumnName="OutfitID" />
+            </EndProperty>
+            <EndProperty Name="OrderList">
+              <ScalarProperty Name="ID" ColumnName="OrderListID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

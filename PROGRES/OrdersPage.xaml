@@ -1,0 +1,120 @@
+﻿<Page x:Class="PROGRES.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PROGRES"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrdersPage">
+    <Page.Resources>
+        <DataTemplate x:Key="ItemTemplateStyle">
+            <Grid Width="440" Name="Item" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="2,2,2,0">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Grid.Column="0">
+                            <TextBlock Text="{Binding Name}"  TextWrapping="NoWrap" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="CarItemTemplateStyle">
+            <Grid Width="440" Name="Item" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid Grid.Row="0">
+                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="250" Margin="2,2,2,0">
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock Text="{Binding Name}"  TextWrapping="NoWrap" FontSize="13"/>
+                                <TextBlock Text=" - " TextWrapping="NoWrap" FontSize="13"/>
+                                <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" FontSize="13"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <GroupBox Margin="0,10,0,0" Width="770" BorderBrush="#FFB600" BorderThickness="0.5" Header="Інформація про товар" FontSize="15" Foreground="White">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Text="Товари" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <ListBox Background="#1A1B3D" Foreground="White" FontSize="15"  x:Name="txtOutfit" Height="100"  Width="204" HorizontalAlignment="Stretch"
+		        VerticalAlignment="Stretch"
+		        BorderThickness="0"
+                     ItemsSource="{Binding}"
+                     ItemTemplate="{DynamicResource ItemTemplateStyle}"
+                     SelectionChanged="txtOutfit_SelectionChanged"
+                     >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                <TextBlock FontSize="15" Grid.Row="1" Text="Кошик" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <ListBox FontSize="15" Background="#1A1B3D" Foreground="White"  x:Name="txtCartList"  Height="100" Width="204" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+		        BorderThickness="0"
+                     ItemsSource="{Binding}"
+                     ItemTemplate="{DynamicResource CarItemTemplateStyle}"
+                     >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                <StackPanel VerticalAlignment="Center" Height="25" Margin="0,0,0,0" Width="200" Orientation="Horizontal">
+                    <TextBlock Margin="45,0,0,0" Foreground="White" Name="CartHeader" Text="Товарів у кошику: "/>
+                    <TextBlock Foreground="White" Name="CartCount" Text=""/>
+                    
+                </StackPanel>
+
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="0,25,0,0" Width="770" BorderBrush="#FFB600" BorderThickness="0.5" Grid.Row="1"  Header="Інформація про замовника" FontSize="15" Foreground="White">
+            <WrapPanel Orientation="Horizontal">
+                <TextBlock  FontSize="15" Text="Прізвище замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Surname}" FontSize="15" Grid.Column="1" Grid.Row="2" Width="200" Height="25"></TextBox>
+                <TextBlock FontSize="15" Text="Ім'я замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Name}" FontSize="15" Grid.Column="1" Grid.Row="3" Width="200" Height="25"></TextBox>
+                <TextBlock FontSize="15"  Text="По-батькові замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Midname}" FontSize="15" Grid.Column="1" Grid.Row="4" Width="200" Height="25"></TextBox>
+                <TextBlock FontSize="15" Grid.Row="9" Text="Адреса замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Adress_Info}"  Grid.Column="1" Grid.Row="9" x:Name="txtAdress" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="210" TextAlignment="Left"  FontSize="15" />
+                <TextBlock FontSize="15" Grid.Row="5" Text="Телефон замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox  BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Phone}" FontSize="15" Grid.Column="1" Grid.Row="5" Width="200" Height="25"></TextBox>
+                <TextBlock FontSize="15" Grid.Row="6" Text="E-Mail замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White"  Text="{Binding Customer_Email}" FontSize="15" Grid.Column="1" Grid.Row="6" Width="200" Height="25"></TextBox>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Margin="0,25,0,0" BorderThickness="0.5" Width="770" BorderBrush="#FFB600" Grid.Row="2" Header="Інформація про товар" FontSize="15" Foreground="White">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Grid.Row="7" Text="Тип оплати" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <ComboBox Text="{Binding Pay_Option}" x:Name="ComboPay" FontSize="15" Grid.Column="1" Grid.Row="7" Width="200" Height="30"></ComboBox>
+                <TextBlock FontSize="15" Grid.Row="8" Text="Загальна сума до сплати, грн" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" x:Name="txtSum" Text="" FontSize="15" Grid.Column="1" Grid.Row="8" Width="200" Height="25"></TextBox>
+            </StackPanel>
+        </GroupBox>
+
+        
+
+        <RadioButton Grid.Row="3"  Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Name="RBtnMakeOrder" Click="RBtnMakeOrder_Click" Content="Сформувати замовлення" Background="#FFB600" Foreground="White" Height="50" FontSize="15" Style="{StaticResource MenuButtonTheme}" Cursor="Hand" Margin="10,0,0,0"/>
+
+   
+
+
+
+    </Grid>
+</Page>
