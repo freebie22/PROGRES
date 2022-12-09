@@ -9,20 +9,30 @@
       Title="OrderListPage" IsVisibleChanged="Page_IsVisibleChanged">
     
     <Grid>
-        <DataGrid BorderThickness="0" Background="#22224B" Foreground="Black" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="DGridOrders" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AutoGenerateColumns="False" IsReadOnly="true">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Ідентифікатор" Binding="{Binding Identificator}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата замовлення" Binding="{Binding CreateDate}" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Замовлені товари" Binding="{Binding Shopping_Info}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Кількість замовленого" Binding="{Binding Outfit_Count}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Вартість замовлення" Binding="{Binding TotalSum}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Спосіб оплати" Binding="{Binding Pay_Option}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Адреса замовлення" Binding="{Binding Adress_Info}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Прізвище замовника" Binding="{Binding Customer_Surname}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Ім'я замовника" Binding="{Binding Customer_Name}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="По-батькові замовника" Binding="{Binding Customer_Midname}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Телефон замовника" Binding="{Binding Customer_Phone}" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Ел.пошта замовника" Binding="{Binding Customer_Email}" Width="250"></DataGridTextColumn>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock FontSize="15" HorizontalAlignment="Center" Text="Пошук за ідентифікатором" Foreground="White"/>
+            <TextBox Margin="0,5,0,0" FontSize="15" BorderThickness="0" Background="#1A1B3D" Foreground="White" x:Name="txtSearch" TextChanged="txtSearch_TextChanged" Width="250" Height="25">
+            </TextBox>
+        </StackPanel>
+        
+        <DataGrid Grid.Row="1" BorderThickness="0" Background="#22224B" Foreground="Black" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" x:Name="DGridOrders" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AutoGenerateColumns="False" IsReadOnly="true">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Ідентифікатор" Binding="{Binding Identificator}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата замовлення" Binding="{Binding CreateDate}" Width="65"></DataGridTextColumn>
+                <DataGridTextColumn Header="Замовлені товари" Binding="{Binding Shopping_Info}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Кількість замовленого" Binding="{Binding Outfit_Count}" Width="50"></DataGridTextColumn>
+                <DataGridTextColumn Header="Вартість замовлення" Binding="{Binding TotalSum}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Спосіб оплати" Binding="{Binding Pay_Option}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Адреса замовлення" Binding="{Binding Adress_Info}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Прізвище замовника" Binding="{Binding Customer_Surname}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ім'я замовника" Binding="{Binding Customer_Name}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="По-батькові замовника" Binding="{Binding Customer_Midname}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Телефон замовника" Binding="{Binding Customer_Phone}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ел.пошта замовника" Binding="{Binding Customer_Email}" Width="150"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

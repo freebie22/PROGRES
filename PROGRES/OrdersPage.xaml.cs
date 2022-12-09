@@ -123,9 +123,15 @@ namespace PROGRES
                     MessageBox.Show("Замовлення сформовано");
                     cartItems.Clear();
 
+                    txtSurname.Text = "";
+                    txtName.Text = "";
+                    txtMidname.Text = "";
+                    txtAdress.Text = "";
+                    txtEmail.Text = "";
+                    txtPhone.Text = "";
                     txtSum.Text = "0";
                     CartCount.Text = "0";
-                    Manager.MainFrame.GoBack();
+                  
                 }
 
                 catch (DbEntityValidationException er)

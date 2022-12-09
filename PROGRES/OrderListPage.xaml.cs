@@ -33,15 +33,17 @@ namespace PROGRES
         public OrderListPage(OrderList selectedOrderList)
         {
             InitializeComponent();
-
-            
+            UpdateOrders();
         }
 
-        
-   
-       
+        private void UpdateOrders()
+        {
+            var currentOrder = ProgresDataBaseEntities.GetContext().Order.ToList();
 
-       
+            currentOrder = currentOrder.Where(p => p.Identificator.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+            DGridOrders.ItemsSource = currentOrder.ToList();
+        }
+
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
@@ -49,6 +51,11 @@ namespace PROGRES
                 ProgresDataBaseEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 DGridOrders.ItemsSource = ProgresDataBaseEntities.GetContext().Order.ToList();
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateOrders();
         }
     }
 }

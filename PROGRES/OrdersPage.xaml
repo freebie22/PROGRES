@@ -86,17 +86,17 @@
         <GroupBox Margin="0,25,0,0" Width="770" BorderBrush="#FFB600" BorderThickness="0.5" Grid.Row="1"  Header="Інформація про замовника" FontSize="15" Foreground="White">
             <WrapPanel Orientation="Horizontal">
                 <TextBlock  FontSize="15" Text="Прізвище замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Surname}" FontSize="15" Grid.Column="1" Grid.Row="2" Width="200" Height="25"></TextBox>
+                <TextBox x:Name="txtSurname" BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Surname}" FontSize="15" Grid.Column="1" Grid.Row="2" Width="200" Height="25"></TextBox>
                 <TextBlock FontSize="15" Text="Ім'я замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Name}" FontSize="15" Grid.Column="1" Grid.Row="3" Width="200" Height="25"></TextBox>
+                <TextBox x:Name="txtName" BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Name}" FontSize="15" Grid.Column="1" Grid.Row="3" Width="200" Height="25"></TextBox>
                 <TextBlock FontSize="15"  Text="По-батькові замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Midname}" FontSize="15" Grid.Column="1" Grid.Row="4" Width="200" Height="25"></TextBox>
+                <TextBox x:Name="txtMidname" BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Midname}" FontSize="15" Grid.Column="1" Grid.Row="4" Width="200" Height="25"></TextBox>
                 <TextBlock FontSize="15" Grid.Row="9" Text="Адреса замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Adress_Info}"  Grid.Column="1" Grid.Row="9" x:Name="txtAdress" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="210" TextAlignment="Left"  FontSize="15" />
+                <TextBox  BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Adress_Info}"  Grid.Column="1" Grid.Row="9" x:Name="txtAdress" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="210" TextAlignment="Left"  FontSize="15" />
                 <TextBlock FontSize="15" Grid.Row="5" Text="Телефон замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox  BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Phone}" FontSize="15" Grid.Column="1" Grid.Row="5" Width="200" Height="25"></TextBox>
+                <TextBox x:Name="txtPhone"  BorderThickness="0" Background="#1A1B3D" Foreground="White" Text="{Binding Customer_Phone}" FontSize="15" Grid.Column="1" Grid.Row="5" Width="200" Height="25"></TextBox>
                 <TextBlock FontSize="15" Grid.Row="6" Text="E-Mail замовника" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"></TextBlock>
-                <TextBox BorderThickness="0" Background="#1A1B3D" Foreground="White"  Text="{Binding Customer_Email}" FontSize="15" Grid.Column="1" Grid.Row="6" Width="200" Height="25"></TextBox>
+                <TextBox x:Name="txtEmail" BorderThickness="0" Background="#1A1B3D" Foreground="White"  Text="{Binding Customer_Email}" FontSize="15" Grid.Column="1" Grid.Row="6" Width="200" Height="25"></TextBox>
             </WrapPanel>
         </GroupBox>
         <GroupBox Margin="0,25,0,0" BorderThickness="0.5" Width="770" BorderBrush="#FFB600" Grid.Row="2" Header="Інформація про товар" FontSize="15" Foreground="White">

@@ -167,7 +167,7 @@ namespace PROGRES
             txtDate.Visibility = Visibility.Hidden;
             txtTime.Visibility = Visibility.Hidden;
 
-            txtTitle.Margin = new System.Windows.Thickness(170, 8, 0, 0);
+            txtTitle.Margin = new System.Windows.Thickness(200, 8, 0, 0);
         }
 
         private void RBtnExit_Click(object sender, RoutedEventArgs e)
